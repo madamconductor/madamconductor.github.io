@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script>if(location.hash==='#adjust'){document.documentElement.className+=' adjust'}else{try{var _g=Storage.prototype.getItem;Storage.prototype.getItem=function(k){return /^yk-/.test(k)?null:_g.call(this,k)}}catch(e){}}</script>
+<style>html:not(.adjust) .draftbar,html:not(.adjust) #panel,html:not(.adjust) #line,html:not(.adjust) #layoutline{display:none!important}</style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects | Yaashvi Kedia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Each project: a white box with the story and a lead image overlapping its edge (the About page's language), then its photos. */
+  --black:#0b0910;--purple-deep:#1d1030;--purple:#3a1f5e;--lilac:#c58ee6;--white:#ffffff;--muted:#b9b1c7;
+  --c-box:#f4eff8;--c-text:#000000;--c-accent:#5a2d91;--c-page:#151019;
+  --s-title:.86;--s-name:1;--s-body:1;--cols:4;--gap:26px;--lead:1.3;--sh:.55;
+  --edge:11%;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--c-page);color:var(--white);font-family:"Raleway","Helvetica Neue",Arial,sans-serif;line-height:1.75;letter-spacing:.015em}
+img{max-width:100%;display:block}
+a{color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--lilac);outline-offset:2px}
+.draftbar{background:var(--purple-deep);border-bottom:1px solid var(--purple);padding:10px 20px;font-size:12.5px;position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+.draftbar strong{font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:var(--lilac)}
+.draftbar label{display:flex;gap:8px;align-items:center}
+.draftbar input[type=range]{width:110px;accent-color:var(--lilac)}
+.draftbar input[type=color]{width:40px;height:26px;border:1px solid var(--purple);border-radius:6px;background:transparent;padding:0;cursor:pointer}
+.draftbar select,.draftbar button{font:inherit;color:var(--white);background:var(--black);border:1px solid var(--purple);border-radius:999px;padding:5px 12px;cursor:pointer}
+#panel{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+#panel[hidden]{display:none}
+#line{flex-basis:100%;color:var(--muted)}#line span{color:var(--white)}
+header{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:22px var(--edge)}
+.brand{font-family:"Cinzel",serif;letter-spacing:.2em;font-size:15px;text-transform:uppercase;text-decoration:none}
+nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px 30px;margin-right:-.22em}
+nav a{text-decoration:none;font-size:11px;letter-spacing:.22em;text-transform:uppercase;transition:color .3s}
+nav a:hover,nav a[aria-current]{color:var(--lilac)}
+main{padding:40px var(--edge) 110px}
+h1{font-family:"Cinzel",serif;font-weight:400;text-transform:uppercase;letter-spacing:.14em;font-size:calc(clamp(30px,4vw,54px) * var(--s-title));line-height:1.15;margin-bottom:44px}
+.proj+.proj{margin-top:120px}
+.top{background:radial-gradient(ellipse 62% 420px at 35% 50%,rgba(183,155,224,.255),rgba(183,155,224,0) 70%);display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start}
+.box{background:var(--c-box);color:var(--c-text);padding:clamp(28px,5vw,64px);padding-right:clamp(64px,9vw,120px)}
+.lead-img{margin-left:-70px;margin-top:80px;width:calc(100% * var(--lead));box-shadow:0 30px 60px rgba(0,0,0,var(--sh));position:relative;z-index:2}
+.proj.mirror .top{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr)}
+.proj.mirror .box{order:2;padding-right:clamp(28px,5vw,64px);padding-left:clamp(64px,9vw,120px)}
+.proj.mirror .lead-img{order:1;margin-left:0;margin-right:-70px;justify-self:end}
+h2{font-family:"Cinzel",serif;font-weight:500;text-transform:uppercase;letter-spacing:.12em;font-size:calc(clamp(24px,2.8vw,38px) * var(--s-name));line-height:1.2;color:var(--c-text)}
+.meta{margin-top:12px;font-size:13px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--c-accent)}
+.box p.txt{margin-top:26px;font-size:calc(16px * var(--s-body));max-width:60ch}
+.facts{list-style:none;margin-top:28px;border-top:1px solid #000}
+.facts li{padding:12px 0;border-bottom:1px solid rgba(0,0,0,.2);font-size:calc(15px * var(--s-body));display:grid;grid-template-columns:120px 1fr;gap:14px}
+.facts b{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--c-accent);padding-top:3px}
+.draftnote{margin-top:22px;font-size:13px;font-style:italic;color:#6b6475}
+.car{position:relative;margin-top:48px}
+.track{display:flex;gap:var(--gap);overflow-x:auto;scrollbar-width:none;padding:2px}
+.track::-webkit-scrollbar{display:none}
+.arr{position:absolute;top:calc(var(--th)/2 - 22px);width:44px;height:44px;border-radius:50%;border:1px solid var(--lilac);background:rgba(11,9,16,.85);color:#fff;font-size:22px;cursor:pointer;z-index:3}
+.arr.l{left:-10px}.arr.r{right:-10px}
+.dots{display:flex;gap:7px;justify-content:center;margin-top:16px}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.28);display:block}
+.dots i.on{background:var(--lilac)}
+.pcap{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 10px;text-align:left;font-size:12px;letter-spacing:.04em;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.7));pointer-events:none}
+.ph{position:relative;flex:none;scroll-snap-align:start;display:block;height:var(--th);border:0;padding:0;background:#2a1a42;cursor:zoom-in;margin:0;border-radius:var(--rad);overflow:hidden}
+.ph img{height:100%;width:auto;display:block;transition:transform .8s ease}
+.ph:hover img{transform:scale(1.03)}
+#lb{position:fixed;inset:0;z-index:50;background:rgba(11,9,16,.94);display:flex;align-items:center;justify-content:center;padding:4vmin}
+#lb[hidden]{display:none}
+#lb img{max-width:100%;max-height:100%;object-fit:contain}
+#lb button{position:absolute;font:inherit;color:var(--white);background:rgba(11,9,16,.6);border:1px solid var(--lilac);border-radius:999px;width:46px;height:46px;font-size:20px;cursor:pointer}
+#lbx{top:18px;right:18px}#lbp{left:18px;top:50%}#lbn{right:18px;top:50%}
+.other{margin-top:110px;max-width:900px}
+.ow-h{display:flex;align-items:center;gap:14px;font-family:"Raleway",sans-serif;font-size:14px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--white);margin-bottom:18px}
+.ow-h::before{content:"";width:40px;height:1px;background:var(--lilac);flex:none}
+.ow-row{display:grid;grid-template-columns:70px 1fr auto;gap:18px;align-items:baseline;padding:14px 0;border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18)}
+.ow-y,.ow-p{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--lilac)}
+.ow-n{font-family:"Cormorant Garamond",Georgia,serif;font-size:21px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:820px){.top,.proj.mirror .top{grid-template-columns:1fr}.lead-img,.proj.mirror .lead-img{margin:24px 0 0;width:100%;order:2}.box,.proj.mirror .box{padding:28px;order:1}.facts li{grid-template-columns:1fr;gap:2px}header{justify-content:center}}
+.phb{aspect-ratio:3/2;display:flex;align-items:center;justify-content:center;background:#f4eff8;border:1px dashed #5a2d9166;color:#5a2d91;font-size:12px;letter-spacing:.2em;text-transform:uppercase}.tbc{font-style:italic;color:#8a7f99}
+.vgrid3{margin:0}
+.vt{position:relative;flex:none;scroll-snap-align:start;height:var(--th);aspect-ratio:16/10;border-radius:var(--rad);display:flex;align-items:flex-end;background:linear-gradient(135deg,#2a1a42,#17131f 70%);text-decoration:none;color:#fff;overflow:hidden}
+.vt .pl{position:absolute;top:14px;right:14px;width:42px;height:42px;border-radius:50%;border:1px solid #fff;background:rgba(11,9,16,.45)}
+.vt .pl::after{content:"";position:absolute;left:16px;top:12px;border-left:12px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.vt .cap{padding:16px 18px;display:flex;flex-direction:column;gap:4px}
+.vt .cap b{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:clamp(18px,1.8vw,24px);line-height:1.2}
+.vt .cap span{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#d6d0e2}
+.vt:hover{outline:1px solid #c58ee6}
+
+</style></head>
+<body>
+<div class="draftbar" role="region" aria-label="Draft tools">
+  <strong>Projects draft</strong>
+  <button type="button" id="toggle" aria-pressed="true">Adjusters: on</button>
+  <button type="button" id="copy">Copy</button>
+  <div id="panel">
+    <label for="aLead1">Lost Woman lead image <select id="aLead1"><option value="img/tlw-poster.jpg">Poster</option><option value="img/tlw-31.jpg">Photo 31</option><option value="img/tlw-32.jpg">Photo 32</option><option value="img/tlw-33.jpg">Photo 33</option><option value="img/tlw-34.jpg">Photo 34</option><option value="img/tlw-35.jpg">Photo 35</option><option value="img/tlw-36.jpg">Photo 36</option><option value="img/tlw-37.jpg">Photo 37</option><option value="img/tlw-38.jpg">Photo 38</option><option value="img/tlw-39.jpg" selected>Photo 39</option></select></label>
+    <label for="aLead2">Anubhuti lead image <select id="aLead2"><option value="img/anu-03.jpg">Photo 3</option><option value="img/anu-04.jpg">Photo 4</option><option value="img/anu-05.jpg">Photo 5</option><option value="img/anu-06.jpg">Photo 6</option><option value="img/anu-07.jpg">Photo 7</option><option value="img/anu-08.jpg">Photo 8</option><option value="img/anu-09.jpg">Photo 9</option><option value="img/anu-10.jpg">Photo 10</option><option value="img/anu-11.jpg">Photo 11</option></select></label>
+    <label for="aMirror">Second project <select id="aMirror"><option value="mirror">mirrored</option><option value="same">same side</option></select></label>
+    <label for="aLeadS">Lead image size <input type="range" id="aLeadS" min="50" max="130" value="130"></label>
+    <label for="aCols">Tile height <input type="range" id="aCols" min="140" max="420" value="260"></label>
+    <label for="aRad">Corner roundness <input type="range" id="aRad" min="0" max="28" value="10"></label>
+    <label for="aSpd">Auto-scroll speed <input type="range" id="aSpd" min="0" max="120" value="83"></label>
+    <label for="aGap">Gap <input type="range" id="aGap" min="0" max="60" value="14"></label>
+    <label for="aBox">Box <input type="color" id="aBox" value="#f4eff8"></label>
+    <label for="aAcc">Purple <input type="color" id="aAcc" value="#5a2d91"></label>
+    <label for="aTitle">Page title size <input type="range" id="aTitle" min="60" max="170" value="86"></label>
+    <label for="aName">Project name size <input type="range" id="aName" min="60" max="170" value="100"></label>
+    <label for="aBody">Text size <input type="range" id="aBody" min="70" max="150" value="100"></label>
+  </div>
+  <div id="line"><em>Your settings:</em> <span id="txt"></span></div>
+</div>
+<header>
+  <a class="brand" href="../">Yaashvi Kedia</a>
+  <nav aria-label="Main"><ul>
+    <li><a href="../about/">About Me</a></li><li><a href="../performances/">Performances</a></li><li><a href="../projects/" aria-current="page">Projects</a></li><li><a href="../maestera/">Maestera</a></li><li><a href="../gallery/">Gallery</a></li><li><a href="../contact/">Contact</a></li>
+  </ul></nav>
+</header>
+<main id="top">
+  <h1>Projects</h1>
+
+  <section class="proj" id="p1">
+    <div class="top">
+      <div class="box">
+        <h2>The Lost Woman</h2>
+        <p class="meta">Since 2021 &middot; Chennai &middot; London</p>
+        <p class="txt">The Lost Woman is aimed at rediscovering classical music by women composers. It started in the year 2021, saw its first performance in April 2022 in Chennai as a piano concert, and in March 2024 in London as a chamber concert.</p>
+        <ul class="facts">
+          <li><b>London</b><span>Sunday 10 March 2024, St Mary&rsquo;s Church, Hendon, for International Women&rsquo;s Day</span></li>
+          <li><b>Programme</b><span>14 works by 14 women composers, written between 1593 and 1978, from Raffaella Aleotti and Barbara Strozzi to Lili Boulanger and Florence Price</span></li>
+          <li><b>Yaashvi</b><span>Director, conductor, pianist and arranger of two works for the Middlesex Philharmonic</span></li>
+        </ul>
+      </div>
+      <div class="lead-img"><img id="lead1" alt="The Lost Woman"></div>
+    </div>
+    <div class="grid track">
+      <button type="button" class="ph" data-g="tlw"><img src="img/tlw-31.jpg" width="867" height="1300" loading="lazy" alt="Photo 31"></button>
+      <button type="button" class="ph" data-g="tlw"><img src="img/tlw-32.jpg" width="1300" height="867" loading="lazy" alt="Photo 32"></button>
+      <button type="button" class="ph" data-g="tlw"><img src="img/tlw-33.jpg" width="1300" height="867" loading="lazy" alt="Photo 33"></button>
+      <button type="button" class="ph" data-g="tlw"><img src="img/tlw-34.jpg" width="1300" height="867" loading="lazy" alt="Photo 34"></button>
+      <button type="button" class="ph" data-g="tlw"><img src="img/tlw-35.jpg" width="1300" height="867" loading="lazy" alt="Photo 35"></button>
+      <button type="button" class="ph" data-g="tlw"><img src="img/tlw-36.jpg" width="1300" height="867" loading="lazy" alt="Photo 36"></button>
+      <button type="button" class="ph" data-g="tlw"><img src="img/tlw-37.jpg" width="1300" height="867" loading="lazy" alt="Photo 37"></button>
+      <button type="button" class="ph" data-g="tlw"><img src="img/tlw-38.jpg" width="1300" height="867" loading="lazy" alt="Photo 38"></button>
+      <button type="button" class="ph" data-g="tlw"><img src="img/tlw-39.jpg" width="1300" height="867" loading="lazy" alt="Photo 39"></button>
+    </div>
+  </section>
+
+  <section class="proj mirror" id="p2">
+    <div class="top">
+      <div class="box">
+        <h2>Anubhuti</h2>
+        <p class="meta">2024 &middot; With Claire Loussouarn</p>
+        <p class="txt">Anubhuti (feeling). An immersive collaboration between Indian classical music and unstylised movement improvisation: a unique sound-movement experience that encourages us to become aware of our bodies when we listen to music, extending to any sound around us.</p>
+        <ul class="facts">
+          <li><b>Performance</b><span>&ldquo;Inside the Music: what music feels like in our bodies&rdquo;, Tuesday 16 April 2024, Grove C, Middlesex University, London</span></li>
+          <li><b>Music</b><span>Alap, a vocal improvisation on the syllable &lsquo;aa&rsquo;, in four ragas: Durga, Yaman, Bhimpalasi and Bhairavi</span></li>
+          <li><b>Artists</b><span>Yaashvi Kedia, music &middot; Claire Loussouarn, movement</span></li>
+          <li><b>Photos</b><span>Charlotte Johnston</span></li>
+        </ul>
+      </div>
+      <div class="lead-img"><img id="lead2" alt="Anubhuti"></div>
+    </div>
+    <div class="grid track">
+      <button type="button" class="ph" data-g="anu"><img src="img/anu-03.jpg" width="1300" height="867" loading="lazy" alt="Photo 3"></button>
+      <button type="button" class="ph" data-g="anu"><img src="img/anu-04.jpg" width="1300" height="929" loading="lazy" alt="Photo 4"></button>
+      <button type="button" class="ph" data-g="anu"><img src="img/anu-05.jpg" width="1300" height="929" loading="lazy" alt="Photo 5"></button>
+      <button type="button" class="ph" data-g="anu"><img src="img/anu-06.jpg" width="1300" height="929" loading="lazy" alt="Photo 6"></button>
+      <button type="button" class="ph" data-g="anu"><img src="img/anu-07.jpg" width="1300" height="929" loading="lazy" alt="Photo 7"></button>
+      <button type="button" class="ph" data-g="anu"><img src="img/anu-08.jpg" width="1300" height="929" loading="lazy" alt="Photo 8"></button>
+      <button type="button" class="ph" data-g="anu"><img src="img/anu-09.jpg" width="1300" height="929" loading="lazy" alt="Photo 9"></button>
+      <button type="button" class="ph" data-g="anu"><img src="img/anu-10.jpg" width="1300" height="867" loading="lazy" alt="Photo 10"></button>
+      <button type="button" class="ph" data-g="anu"><img src="img/anu-11.jpg" width="867" height="1300" loading="lazy" alt="Photo 11"></button>
+    </div>
+  </section>
+
+  <section class="proj" id="p3">
+    <div class="top">
+      <div class="box">
+        <h2>Home Is Where the Heart Is</h2>
+        <p class="meta">2024 &middot; Middlesex University, London</p>
+        <p class="txt">Home Is Where the Heart Is is a project promoting new music that expresses cultural identity. Yaashvi was its Artistic Director while Resident Intern at Middlesex University, in the Creative and Social Media Residency for the Music Directorate.</p>
+        <ul class="facts">
+          <li><b>Role</b><span>Artistic Director, during the Creative and Social Media Residency, June to July 2024</span></li>
+          <li><b>Release</b><span>Five composers, released over five days, 8th to 12th July</span></li>
+          <li><b>Videos</b><span>Six performances, below</span></li>
+        </ul>
+      </div>
+      <div class="lead-img"><img src="img/hiwth-poster.jpg" style="height:auto;aspect-ratio:1/1;object-fit:cover" width="1080" height="1080" alt="Home Is Where the Heart Is poster: a heart with flowers and butterflies, 5 composers, 8th to 12th July, cultural identity, 5 days of release"></div>
+    </div>
+    <div class="vgrid3 track">
+      <a class="vt" href="https://youtu.be/BqnCTy9GHkw" target="_blank" rel="noopener" aria-label="Watch on YouTube: Fantasy in Raag Yaman"><span class="pl"></span><span class="cap"><b>Fantasy in Raag Yaman</b><span>Yaashvi Kedia</span></span></a>
+      <a class="vt" href="https://youtu.be/qEXuHn-NVZo" target="_blank" rel="noopener" aria-label="Watch on YouTube: High Flying Kite"><span class="pl"></span><span class="cap"><b>High Flying Kite</b><span>Srijani Balaji</span></span></a>
+      <a class="vt" href="https://youtu.be/xwV47e5Qz84" target="_blank" rel="noopener" aria-label="Watch on YouTube: l&rsquo;infinito di noi"><span class="pl"></span><span class="cap"><b>l&rsquo;infinito di noi</b><span>Francesco Pio</span></span></a>
+      <a class="vt" href="https://youtu.be/fRSZ6FnGYa8" target="_blank" rel="noopener" aria-label="Watch on YouTube: Sotto l&rsquo;ombra di Dio"><span class="pl"></span><span class="cap"><b>Sotto l&rsquo;ombra di Dio</b><span>Francesco Pio</span></span></a>
+      <a class="vt" href="https://youtu.be/Gi4_NzedH0g" target="_blank" rel="noopener" aria-label="Watch on YouTube: Funeral"><span class="pl"></span><span class="cap"><b>Funeral</b><span>Hades Serapis</span></span></a>
+      <a class="vt" href="https://youtu.be/wsUcUs483xI" target="_blank" rel="noopener" aria-label="Watch on YouTube: Bhailo"><span class="pl"></span><span class="cap"><b>Bhailo</b><span>Aditya Shrestha</span></span></a>
+    </div>
+  </section>
+
+  <section class="other" aria-labelledby="ow">
+    <h2 id="ow" class="ow-h">Other works</h2>
+    <div class="ow-row"><span class="ow-y">2025</span><span class="ow-n">Orchestration for composer Kavi Pau</span><span class="ow-p">Southbank Centre, London</span></div>
+    <div class="ow-row"><span class="ow-y">2024</span><span class="ow-n">Music with specially-abled learners, middle school music classes and the High School Musical Showcase</span><span class="ow-p">Gateway School of Mumbai</span></div>
+  </section>
+</main>
+<div id="lb" hidden role="dialog" aria-label="Photo viewer"><img id="lbi" alt=""><button type="button" id="lbx" aria-label="Close">&times;</button><button type="button" id="lbp" aria-label="Previous photo">&lsaquo;</button><button type="button" id="lbn" aria-label="Next photo">&rsaquo;</button></div>
+<script>
+(function(){
+  var KEY='yk-projects-v5',root=document.documentElement;
+  var ids=['aLead1','aLead2','aMirror','aLeadS','aCols','aRad','aSpd','aGap','aBox','aAcc','aTitle','aName','aBody'],E={};ids.forEach(function(i){E[i]=document.getElementById(i)});
+  E.aLead2.selectedIndex=0;
+  function lab(s){return s.options[s.selectedIndex].text;}
+  function apply(){
+    document.getElementById('lead1').src=E.aLead1.value;document.getElementById('lead2').src=E.aLead2.value;
+    document.getElementById('p2').classList.toggle('mirror',E.aMirror.value==='mirror');
+    root.style.setProperty('--lead',E.aLeadS.value/100);if(window.__setSpeed)window.__setSpeed(+E.aSpd.value);root.style.setProperty('--th',E.aCols.value+'px');root.style.setProperty('--rad',E.aRad.value+'px');root.style.setProperty('--gap',E.aGap.value+'px');
+    root.style.setProperty('--c-box',E.aBox.value);root.style.setProperty('--c-accent',E.aAcc.value);
+    root.style.setProperty('--s-title',E.aTitle.value/100);root.style.setProperty('--s-name',E.aName.value/100);root.style.setProperty('--s-body',E.aBody.value/100);
+    document.getElementById('txt').textContent='Projects: Lost Woman lead '+lab(E.aLead1)+', Anubhuti lead '+lab(E.aLead2)+', second project '+lab(E.aMirror)+', lead image size '+E.aLeadS.value+'%, '+E.aCols.value+'px tile height, auto-scroll '+E.aSpd.value+', corners '+E.aRad.value+'px, gap '+E.aGap.value+'px, box '+E.aBox.value+', purple '+E.aAcc.value+', page title '+E.aTitle.value+'%, project name '+E.aName.value+'%, text '+E.aBody.value+'%.';
+    try{var s={};ids.forEach(function(i){s[i]=E[i].value});localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}
+  }
+  try{var s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)ids.forEach(function(i){if(s[i]!=null)E[i].value=s[i]});}catch(e){}
+  ids.forEach(function(i){E[i].addEventListener('input',apply);E[i].addEventListener('change',apply);});apply();
+  var panel=document.getElementById('panel'),tg=document.getElementById('toggle');
+  tg.addEventListener('click',function(){var on=panel.hidden;panel.hidden=!on;tg.setAttribute('aria-pressed',on?'true':'false');tg.textContent='Adjusters: '+(on?'on':'off');});
+  document.getElementById('copy').addEventListener('click',function(){var b=this;try{navigator.clipboard.writeText(document.getElementById('txt').textContent).then(function(){b.textContent='Copied';},function(){b.textContent='Select the text';});}catch(e){b.textContent='Select the text';}});
+  document.querySelectorAll('.track').forEach(function(tr){
+    var w=document.createElement('div');w.className='car';tr.parentNode.insertBefore(w,tr);
+    var l=document.createElement('button');l.type='button';l.className='arr l';l.setAttribute('aria-label','Previous');l.innerHTML='&lsaquo;';
+    var r=document.createElement('button');r.type='button';r.className='arr r';r.setAttribute('aria-label','Next');r.innerHTML='&rsaquo;';
+    var d=document.createElement('div');d.className='dots';
+    w.appendChild(l);w.appendChild(tr);w.appendChild(r);w.appendChild(d);
+    var kids=[].slice.call(tr.children);
+    var nm=tr.closest('section').querySelector('h2').textContent;
+    kids.forEach(function(k){d.appendChild(document.createElement('i'));if(k.classList.contains('ph')){var c=document.createElement('span');c.className='pcap';c.textContent=nm;k.appendChild(c);}});
+    function st(){return Math.max(160,tr.clientWidth*.7)}
+    l.addEventListener('click',function(){tr.scrollBy({left:-st(),behavior:'smooth'})});
+    r.addEventListener('click',function(){tr.scrollBy({left:st(),behavior:'smooth'})});
+    function dots(){var n=0,best=1e9;kids.forEach(function(k,i){var x=Math.abs(k.offsetLeft-tr.offsetLeft-tr.scrollLeft);if(x<best){best=x;n=i}});[].forEach.call(d.children,function(e,i){e.classList.toggle('on',i===n)})}
+    tr.addEventListener('scroll',dots);dots();
+  });
+  var speed=83,still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  document.querySelectorAll('.track').forEach(function(tr){
+    var pos=0,hold=false,last=0,wait=0;
+    function pause(){hold=true}function go(){hold=false;pos=tr.scrollLeft}
+    ['mouseenter','touchstart','focusin','pointerdown'].forEach(function(e){tr.parentNode.addEventListener(e,pause,{passive:true})});
+    ['mouseleave','touchend','focusout','pointerup'].forEach(function(e){tr.parentNode.addEventListener(e,go,{passive:true})});
+    function tick(t){
+      var dt=Math.min(.1,(t-last)/1000||0);last=t;
+      if(!hold&&!still&&speed>0&&!document.hidden){
+        var max=tr.scrollWidth-tr.clientWidth;
+        if(wait>0){wait-=dt;if(wait<=0){pos=0;tr.scrollTo({left:0,behavior:'smooth'});wait=-1;}}
+        else if(wait===-1){if(tr.scrollLeft<2){wait=0;pos=0;}}
+        else if(pos>=max-1){wait=1.2;}
+        else{pos=Math.min(max,pos+speed*dt);tr.scrollLeft=pos;}
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+  window.__setSpeed=function(v){speed=v};speed=+E.aSpd.value;
+  var lb=document.getElementById('lb'),lbi=document.getElementById('lbi'),set=[],cur=0;
+  function open(i){cur=(i+set.length)%set.length;var im=set[cur].querySelector('img');lbi.src=im.getAttribute('src');lbi.alt=im.alt;lb.hidden=false;}
+  document.querySelectorAll('.ph').forEach(function(b){b.addEventListener('click',function(){set=[].slice.call(document.querySelectorAll('.ph[data-g="'+b.getAttribute('data-g')+'"]'));open(set.indexOf(b));});});
+  document.getElementById('lbx').addEventListener('click',function(){lb.hidden=true});
+  document.getElementById('lbp').addEventListener('click',function(){open(cur-1)});
+  document.getElementById('lbn').addEventListener('click',function(){open(cur+1)});
+  lb.addEventListener('click',function(e){if(e.target===lb)lb.hidden=true});
+  document.addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')lb.hidden=true;if(e.key==='ArrowLeft')open(cur-1);if(e.key==='ArrowRight')open(cur+1);});
+})();
+</script>
+<style>.yt-in{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;z-index:5}</style>
+<script>(function(){var live=/(^|\.)yaashvikedia\.com$|\.github\.io$/.test(location.hostname);if(!live)return;
+document.addEventListener('click',function(e){var a=e.target.closest('a.frame,a.vid,a.vt');if(!a)return;var m=(a.getAttribute('href')||'').match(/youtu\.be\/([\w-]{6,})/);if(!m)return;e.preventDefault();
+if(getComputedStyle(a).position==='static')a.style.position='relative';var f=document.createElement('iframe');f.className='yt-in';f.src='https://www.youtube-nocookie.com/embed/'+m[1]+'?autoplay=1&rel=0';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.title=a.getAttribute('aria-label')||'Video';f.setAttribute('referrerpolicy','strict-origin-when-cross-origin');a.appendChild(f);a.removeAttribute('href');a.style.cursor='default';},false);})();</script>
+</body></html>

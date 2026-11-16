@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script>if(location.hash==='#adjust'){document.documentElement.className+=' adjust'}else{try{var _g=Storage.prototype.getItem;Storage.prototype.getItem=function(k){return /^yk-/.test(k)?null:_g.call(this,k)}}catch(e){}}</script>
+<style>html:not(.adjust) .draftbar,html:not(.adjust) #panel,html:not(.adjust) #line,html:not(.adjust) #layoutline{display:none!important}</style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery | Yaashvi Kedia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Simple photo grid, two columns by default (Yaashvi's brief, after Charlotte Corderoy's gallery), in the home page's black. */
+  --black:#0b0910;--purple-deep:#1d1030;--purple:#3a1f5e;--lilac:#c58ee6;--white:#ffffff;--muted:#b9b1c7;
+  --cols:4;--gap:26px;--edge:11%;--s-title:.83;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#151019;color:var(--white);font-family:"Raleway","Helvetica Neue",Arial,sans-serif;line-height:1.6;letter-spacing:.015em}
+img{max-width:100%;display:block}
+a{color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--lilac);outline-offset:2px}
+.draftbar{background:var(--purple-deep);border-bottom:1px solid var(--purple);padding:10px 20px;font-size:12.5px;position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center}
+.draftbar strong{font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:11px;color:var(--lilac)}
+.draftbar label{display:flex;gap:8px;align-items:center}
+.draftbar input[type=range]{width:130px;accent-color:var(--lilac)}
+.draftbar select,.draftbar button{font:inherit;color:var(--white);background:var(--black);border:1px solid var(--purple);border-radius:999px;padding:5px 12px;cursor:pointer}
+.draftbar output{color:var(--muted);font-variant-numeric:tabular-nums;min-width:34px}
+#line{flex-basis:100%;color:var(--muted)}#line span{color:var(--white)}
+header{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:22px var(--edge)}
+.brand{font-family:"Cinzel",serif;letter-spacing:.2em;font-size:15px;text-transform:uppercase;text-decoration:none}
+nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px 30px;margin-right:-.22em}
+nav a{text-decoration:none;font-size:11px;letter-spacing:.22em;text-transform:uppercase;transition:color .3s}
+nav a:hover,nav a[aria-current]{color:var(--lilac)}
+main{padding:40px var(--edge) 110px}
+h1{font-family:"Cinzel",serif;font-weight:400;text-transform:uppercase;letter-spacing:.14em;font-size:calc(clamp(30px,4vw,54px) * var(--s-title));line-height:1.15;margin-bottom:36px}
+.grid{column-count:var(--cols);column-gap:var(--gap)}
+.ph{display:block;width:100%;border:0;padding:0;background:none;cursor:zoom-in;margin:0 0 var(--gap);break-inside:avoid;overflow:hidden}
+.ph img{width:100%;height:auto;transition:transform .8s ease,opacity .4s}
+.ph:hover img{transform:scale(1.03)}
+.grid.crop{column-count:auto;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:var(--gap)}
+.grid.crop .ph{margin:0;aspect-ratio:var(--ar)}
+.grid.crop .ph img{height:100%;object-fit:cover}
+#lb{position:fixed;inset:0;z-index:50;background:rgba(11,9,16,.94);display:flex;align-items:center;justify-content:center;padding:4vmin}
+#lb[hidden]{display:none}
+#lb img{max-width:100%;max-height:100%;object-fit:contain}
+#lb button{position:absolute;font:inherit;color:var(--white);background:rgba(11,9,16,.6);border:1px solid var(--lilac);border-radius:999px;width:46px;height:46px;font-size:20px;cursor:pointer}
+#lbx{top:18px;right:18px}#lbp{left:18px;top:50%}#lbn{right:18px;top:50%}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media (max-width:700px){.grid{column-count:min(var(--cols),2)}header{justify-content:center}}
+</style></head>
+<body>
+<div class="draftbar" role="region" aria-label="Draft tools">
+  <strong>Gallery draft</strong>
+  <label for="gCols">Columns <input type="range" id="gCols" min="1" max="4" value="4"><output id="oCols"></output></label>
+  <label for="gGap">Gap <input type="range" id="gGap" min="0" max="60" value="26"><output id="oGap"></output></label>
+  <label for="gShape">Photo shape <select id="gShape"><option value="natural">Natural</option><option value="1/1">Square</option><option value="3/2">Landscape</option><option value="4/5">Portrait</option></select></label>
+  <label for="gTitle">Title size <input type="range" id="gTitle" min="60" max="170" value="83"><output id="oTitle"></output></label>
+  <button type="button" id="copy">Copy</button>
+  <div id="line"><em>Your settings:</em> <span id="txt"></span></div>
+</div>
+<header>
+  <a class="brand" href="../">Yaashvi Kedia</a>
+  <nav aria-label="Main"><ul>
+    <li><a href="../about/">About Me</a></li><li><a href="../performances/">Performances</a></li><li><a href="../projects/">Projects</a></li><li><a href="../maestera/">Maestera</a></li><li><a href="../gallery/" aria-current="page">Gallery</a></li><li><a href="../contact/">Contact</a></li>
+  </ul></nav>
+</header>
+<main id="top">
+  <h1>Gallery</h1>
+  <div class="grid" id="grid">
+    <button type="button" class="ph" data-i="0"><img src="img/photo-02.jpg" width="1400" height="1050" loading="lazy" alt="Yaashvi Kedia, gallery photo 1"></button>
+    <button type="button" class="ph" data-i="1"><img src="img/photo-14.jpg" width="1400" height="933" loading="lazy" alt="Yaashvi Kedia, gallery photo 2"></button>
+    <button type="button" class="ph" data-i="2"><img src="img/photo-15.jpg" width="1280" height="853" loading="lazy" alt="Yaashvi Kedia, gallery photo 3"></button>
+    <button type="button" class="ph" data-i="3"><img src="img/photo-16.jpg" width="933" height="1400" loading="lazy" alt="Yaashvi Kedia, gallery photo 4"></button>
+    <button type="button" class="ph" data-i="4"><img src="img/photo-18.jpg" width="1400" height="933" loading="lazy" alt="Yaashvi Kedia, gallery photo 5"></button>
+    <button type="button" class="ph" data-i="5"><img src="img/photo-19.jpg" width="933" height="1400" loading="lazy" alt="Yaashvi Kedia, gallery photo 6"></button>
+    <button type="button" class="ph" data-i="6"><img src="img/photo-26.jpg" width="933" height="1400" loading="lazy" alt="Yaashvi Kedia, gallery photo 7"></button>
+    <button type="button" class="ph" data-i="7"><img src="img/photo-27.jpg" width="933" height="1400" loading="lazy" alt="Yaashvi Kedia, gallery photo 8"></button>
+    <button type="button" class="ph" data-i="8"><img src="img/photo-34.jpg" width="1400" height="933" loading="lazy" alt="Yaashvi Kedia, gallery photo 9"></button>
+    <button type="button" class="ph" data-i="9"><img src="img/photo-38.jpg" width="1400" height="933" loading="lazy" alt="Yaashvi Kedia, gallery photo 10"></button>
+    <button type="button" class="ph" data-i="10"><img src="img/photo-45.jpg" width="1250" height="703" loading="lazy" alt="Yaashvi Kedia, gallery photo 11"></button>
+    <button type="button" class="ph" data-i="11"><img src="img/photo-46.jpg" width="1400" height="874" loading="lazy" alt="Yaashvi Kedia, gallery photo 12"></button>
+    <button type="button" class="ph" data-i="12"><img src="img/photo-47.jpg" width="1050" height="1400" loading="lazy" alt="Yaashvi Kedia, gallery photo 13"></button>
+    <button type="button" class="ph" data-i="13"><img src="img/photo-48.jpg" width="1400" height="933" loading="lazy" alt="Yaashvi Kedia, gallery photo 14"></button>
+  </div>
+</main>
+<div id="lb" hidden role="dialog" aria-label="Photo viewer"><img id="lbi" alt=""><button type="button" id="lbx" aria-label="Close">&times;</button><button type="button" id="lbp" aria-label="Previous photo">&lsaquo;</button><button type="button" id="lbn" aria-label="Next photo">&rsaquo;</button></div>
+<script>
+(function(){
+  var KEY='yk-gallery-v2',root=document.documentElement,grid=document.getElementById('grid');
+  var c=document.getElementById('gCols'),g=document.getElementById('gGap'),s=document.getElementById('gShape'),t=document.getElementById('gTitle');
+  function apply(){
+    root.style.setProperty('--cols',c.value);root.style.setProperty('--gap',g.value+'px');root.style.setProperty('--s-title',t.value/100);
+    var crop=s.value!=='natural';grid.classList.toggle('crop',crop);if(crop)root.style.setProperty('--ar',s.value);
+    document.getElementById('oCols').textContent=c.value;document.getElementById('oGap').textContent=g.value+'px';document.getElementById('oTitle').textContent=t.value+'%';
+    document.getElementById('txt').textContent='Gallery: '+c.value+' columns, gap '+g.value+'px, photo shape '+s.options[s.selectedIndex].text+', title size '+t.value+'%.';
+    try{localStorage.setItem(KEY,JSON.stringify([c.value,g.value,s.value,t.value]));}catch(e){}
+  }
+  try{var v=JSON.parse(localStorage.getItem(KEY)||'null');if(v){c.value=v[0];g.value=v[1];s.value=v[2];t.value=v[3];}}catch(e){}
+  [c,g,s,t].forEach(function(x){x.addEventListener('input',apply);x.addEventListener('change',apply);});apply();
+  document.getElementById('copy').addEventListener('click',function(){var b=this;try{navigator.clipboard.writeText(document.getElementById('txt').textContent).then(function(){b.textContent='Copied';},function(){b.textContent='Select the text';});}catch(e){b.textContent='Select the text';}});
+  var ph=[].slice.call(document.querySelectorAll('.ph')),lb=document.getElementById('lb'),lbi=document.getElementById('lbi'),cur=0;
+  function open(i){cur=(i+ph.length)%ph.length;var im=ph[cur].querySelector('img');lbi.src=im.getAttribute('src');lbi.alt=im.alt;lb.hidden=false;}
+  ph.forEach(function(b,i){b.addEventListener('click',function(){open(i)})});
+  document.getElementById('lbx').addEventListener('click',function(){lb.hidden=true});
+  document.getElementById('lbp').addEventListener('click',function(e){e.stopPropagation();open(cur-1)});
+  document.getElementById('lbn').addEventListener('click',function(e){e.stopPropagation();open(cur+1)});
+  lb.addEventListener('click',function(e){if(e.target===lb)lb.hidden=true});
+  document.addEventListener('keydown',function(e){if(lb.hidden)return;if(e.key==='Escape')lb.hidden=true;if(e.key==='ArrowLeft')open(cur-1);if(e.key==='ArrowRight')open(cur+1);});
+})();
+</script>
+<style>.yt-in{position:absolute;inset:0;width:100%;height:100%;border:0;background:#000;z-index:5}</style>
+<script>(function(){var live=/(^|\.)yaashvikedia\.com$|\.github\.io$/.test(location.hostname);if(!live)return;
+document.addEventListener('click',function(e){var a=e.target.closest('a.frame,a.vid,a.vt');if(!a)return;var m=(a.getAttribute('href')||'').match(/youtu\.be\/([\w-]{6,})/);if(!m)return;e.preventDefault();
+if(getComputedStyle(a).position==='static')a.style.position='relative';var f=document.createElement('iframe');f.className='yt-in';f.src='https://www.youtube-nocookie.com/embed/'+m[1]+'?autoplay=1&rel=0';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.title=a.getAttribute('aria-label')||'Video';f.setAttribute('referrerpolicy','strict-origin-when-cross-origin');a.appendChild(f);a.removeAttribute('href');a.style.cursor='default';},false);})();</script>
+</body></html>
